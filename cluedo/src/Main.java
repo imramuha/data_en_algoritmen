@@ -32,6 +32,7 @@ public class Main {
 
             // opslaan en conversie van de input
             String rondes[] = new String[aantalVragen];
+            List<List<Integer>> kaartenInHand = new ArrayList<List<Integer>>();
             List<List<Integer>> kaartenMogelijkInHand = new ArrayList<List<Integer>>();
             List<List<Integer>> kaartenOnmogelijkInHand = new ArrayList<List<Integer>>();
 
@@ -39,8 +40,10 @@ public class Main {
             for (int x = 0; x < aantalSpelers; x++) {
                 List<Integer> spelerMogelijk = new ArrayList<>();
                 List<Integer> spelerOnmogelijk = new ArrayList<>();
+                List<Integer> spelers = new ArrayList<>();
                 kaartenMogelijkInHand.add(spelerMogelijk);
                 kaartenOnmogelijkInHand.add(spelerOnmogelijk);
+                kaartenInHand.add(spelers);
             }
 
             // per ronde steken wij de gevraade tot benatwoorder data in een lijst.
@@ -48,7 +51,7 @@ public class Main {
                 String ronde = kaarten.bijhouden(reader.nextLine());
                 rondes[j] = ronde;
             }
-            kaarten.sorteren(aantalSpelers, aantalPersonen, aantalLocaties, aantalWapens, rondes, kaartenMogelijkInHand, kaartenOnmogelijkInHand);
+            kaarten.sorteren(aantalSpelers, aantalPersonen, aantalLocaties, aantalWapens, rondes, kaartenInHand, kaartenMogelijkInHand, kaartenOnmogelijkInHand);
 
             speel.speel(aantalSpelers, aantalPersonen, aantalLocaties, aantalWapens);
 
@@ -68,9 +71,9 @@ class Speel {
 
     // voor elke spel voer de vragenronde uit
     public void speel(int aantalSpelers, int aantalPersonen, int aantalLocaties, int aantalWapens) {
-        System.out.println("aantalpersonen:" + aantalPersonen);
-        System.out.println("aantallocaties:" + aantalLocaties);
-        System.out.println("aantalWapens:" + aantalWapens);
+        //System.out.println("aantalpersonen:" + aantalPersonen);
+        //System.out.println("aantallocaties:" + aantalLocaties);
+        //System.out.println("aantalWapens:" + aantalWapens);
 
         // aantal kaarten -1 (oplossing) worden over aantal spelers verdeeld
         int kaartenSpeler = (((aantalPersonen)-1) + (aantalLocaties-1) + ((aantalWapens)-1))/aantalSpelers;
@@ -122,7 +125,7 @@ class Kaarten {
            return ronde;
     }
 
-    public void sorteren(int aantalSpelers, int aantalPersonen, int aantalLocaties, int aantalWapens, String[] rondes, List<List<Integer>> kaartenMogelijkInHand, List<List<Integer>> kaartenOnmogelijkInHand) {
+    public void sorteren(int aantalSpelers, int aantalPersonen, int aantalLocaties, int aantalWapens, String[] rondes,List<List<Integer>> kaartenInHand, List<List<Integer>> kaartenMogelijkInHand, List<List<Integer>> kaartenOnmogelijkInHand) {
 
         // vraagRondes // elke ronde is data anders dus hier gebeurt veel
         for (int j = 0; j<rondes.length; j++) {
@@ -136,51 +139,64 @@ class Kaarten {
 
             // als niemand kaarten heeft, dan zullen wij die alleen als "mogelijkinhand" opslaan voor de vrager
             if (Character.isDigit(rondes[j].charAt(4))) {
-                // sla de kaarten per speler op..
-                kaartenMogelijkInHand.get(gevraagdeSpeler-1).add(gevraagdeKaarten);
-
-
+                // sla de kaarten in de gevraagdespeler zijn handen in
+                kaartenInHand.get(gevraagdeSpeler-1).add(gevraagdeKaarten);
 
                 if(j > 0) {
-                    int vorigeGevraagdeSpeler = rondes[j-1].charAt(4);
-                    int huidigeGevraagdeSpeler = rondes[j].charAt(4);
-                    int x = 1;
-
-                    while(x <= 4) {
-                        //System.out.println(x);
-
-                        if(huidigeGevraagdeSpeler == aantalSpelers)
-                        {
-                            x = 1;
-                        }
-                        else {
-                            x++;
-                        }
-
-
-
-                        // gaat vier keer gebeuren, we gaan de data in vier keren in de juiste gedoe steken
-                        // wij gaan kijken of er skippers zijn
-                        // vorige gevraagdespeler is bijgekomen met +1?
-                        if(vorigeGevraagdeSpeler + 1 == huidigeGevraagdeSpeler) {
-                            //System.out.println("plus met 1");
-                            // de resterende twee spelers kregen deze kaart als mogelijk!!
-                        } else {
-                            // hier moeten wij de cijfers van de skippers uitkomen
-                            // bij skippers zal deze kaart bij onmogelijk gestoken worden, bij de andere bij mogelijk
-                            //System.out.println("plus met ???");
-                        }
-
+                    int vorigeGevraagdeSpeler;
+                    int huidigeGevraagdeSpeler = Character.getNumericValue(rondes[j].charAt(4));
+                    if(Character.isDigit(rondes[j-1].charAt(4))) {
+                        vorigeGevraagdeSpeler = Character.getNumericValue(rondes[j-1].charAt(4));
+                    } else {
+                        vorigeGevraagdeSpeler = Character.getNumericValue(rondes[j-2].charAt(4));
                     }
 
+                    if(vorigeGevraagdeSpeler + 1 == huidigeGevraagdeSpeler || vorigeGevraagdeSpeler == 0) {
+                        // als geen skippers, mogelijke kaarten toevoegen bij de resterende twee behalve de vrager en beantwoordde
+                        for(int i = 1; i <= aantalSpelers; i++) {
+                            if(i != vrager && i != huidigeGevraagdeSpeler) {
+                                kaartenMogelijkInHand.get(i-1).add(gevraagdeKaarten);
+                            }
+                        }
+
+                    } else {
+                        // als een ronde skippers bevat, zullen wij kaarten van die ronde voor de skippers op onmogelijk zetten en duplicates uit
+                        // mogelijkehand verwijderen
+                        //System.out.println("vorige:" + vorigeGevraagdeSpeler + "vrager:" + vrager + " - huid:" + huidigeGevraagdeSpeler + " - kaart:" + gevraagdeKaarten);
+                        int x = 0;
+                        //List<Integer> skippers = new ArrayList<Integer>();
+
+                        while(x != 4) {
+                            x++;
+
+                            int volgendeSpeler = vorigeGevraagdeSpeler + x;
+
+                            if(!(volgendeSpeler <= aantalSpelers)) {
+                                volgendeSpeler -= 4;
+                            }
+
+                            // als ze gelijk zijn betekent het dat er geen skippers zijn
+                            if(volgendeSpeler == huidigeGevraagdeSpeler) {
+
+                                break;
+
+                            } else if (volgendeSpeler != vrager ) {
+
+                                if(kaartenMogelijkInHand.get(volgendeSpeler-1).contains(gevraagdeKaarten)) {
+                                    kaartenMogelijkInHand.get(volgendeSpeler-1).remove(Integer.valueOf(gevraagdeKaarten));
+                                }
+
+                                //skippers.add(volgendeSpeler);
+
+                                kaartenOnmogelijkInHand.get(volgendeSpeler-1).add(gevraagdeKaarten);
+                            }
+
+                        }
+                        //System.out.println(skippers);
+                    }
                 }
 
-
             } else {
-                // als X, wij steken de kaarten bij onmogelijk voor alle behalve vrager
-                // nu moeten wij onmogelijke steken bij skippers!
-
-                // dan gaan wij onmogelijke kaarten toevoegen bij de resterende drie behalve de vrager
                 for(int i = 1; i <= aantalSpelers; i++) {
                     if(i != vrager) {
                         kaartenOnmogelijkInHand.get(i-1).add(gevraagdeKaarten);
@@ -191,82 +207,46 @@ class Kaarten {
 
         }
 
+        for (int x = 0;  x < aantalSpelers; x++) {
 
-
-        // kaartenmogelijkinhand z??1
-        for (int x = 0;  x < 1; x++) {
-            // ik ga per 3 cifers zoeken of er zijn waarbij de 1ste letter een match is, dan ga ik kijken of de
-            // sow elke mogelijke hand
-
-
-            for ( int y = 0; y < kaartenMogelijkInHand.get(x).size(); y++) {
-                System.out.println(kaartenMogelijkInHand.get(x).size());
+            for ( int y = 0; y < kaartenInHand.get(x).size(); y++) {
 
                 for (int z = 0; z < kaartenOnmogelijkInHand.get(x).size(); z++) {
 
-                    // ever wanna delete duplicates beforehand
-                    /*if(kaartenMogelijkInHand.get(x).get(y) == kaartenMogelijkInHand.get(x).get(y+1)) {
-                        kaartenMogelijkInHand.get(x).remove(y);
+                    String temp = kaartenInHand.get(x).get(y).toString();
+                    String temp_compare = kaartenOnmogelijkInHand.get(x).get(z).toString();
 
-                    }*/
-
-                    System.out.println(kaartenOnmogelijkInHand.get(x).size());
-
-
-
-                    // eerst gaan wij kijken in onmogelijk, als wel, dan naar volgende tot onmogelijk gedaan is
-                    // daan doen wij voort met mogelijke
-                    // dan weer met onmogelijke
-
-                    int temp = kaartenMogelijkInHand.get(x).get(y);
-                    int temp_compare = kaartenOnmogelijkInHand.get(x).get(z);
-
-                    // remove same cards from kartenmgelijkinhand
-                    System.out.println(temp);
-                    System.out.println(temp_compare);
-
+                    if (temp.charAt(1) == temp_compare.charAt(1) && temp.charAt(2) == temp_compare.charAt(2)  && temp.charAt(0) != temp_compare.charAt(0)) // if its not same it means it might exist
+                    {
+                        // hier numberhouden
+                        System.out.println(temp);
+                        System.out.println(temp_compare.charAt(0));
+                        System.out.println("unique - first");
+                    }
+                    if (temp.charAt(1) == temp_compare.charAt(1) && temp.charAt(0) == temp_compare.charAt(0)  && temp.charAt(2) != temp_compare.charAt(2) ){ // if its not same it means it might exist
+                        // hier grote alfabet
+                        int b = (int) temp.charAt(2) + 48;
+                        // hier numberhouden
+                        System.out.println((char)b);
+                        System.out.println("unique - last");
+                        System.out.println(temp);
+                    }
+                    if (temp.charAt(2) == temp_compare.charAt(2) && temp.charAt(0) == temp_compare.charAt(0)  && temp.charAt(1) != temp_compare.charAt(1)) {
+                        // hier klein kapitaal
+                        int b = (int) temp.charAt(1) + 16;
+                        // hier numberhouden
+                        System.out.println((char)b);
+                        System.out.println("unique - middle unique");
+                        System.out.println(temp);
+                    }
+                    //System.out.println(temp + ":" + temp_compare);
                 }
-
             }
 
-            for ( int y = 0; y < kaartenMogelijkInHand.get(x).size(); y++) {
-                    System.out.println(y);
-
-                for (int z = y+1; z < kaartenMogelijkInHand.get(x).size(); z++) {
-
-                    // ever wanna delete duplicates beforehand
-                    /*if(kaartenMogelijkInHand.get(x).get(y) == kaartenMogelijkInHand.get(x).get(y+1)) {
-                        kaartenMogelijkInHand.get(x).remove(y);
-
-                    }*/
-
-                    System.out.println(z);
-
-
-
-                    // eerst gaan wij kijken in onmogelijk, als wel, dan naar volgende tot onmogelijk gedaan is
-                    // daan doen wij voort met mogelijke
-                    // dan weer met onmogelijke
-
-                    int temp = kaartenMogelijkInHand.get(x).get(y);
-                    int temp_compare = kaartenMogelijkInHand.get(x).get(z);
-
-                    // remove same cards from kartenmgelijkinhand
-                    System.out.println(temp);
-                    System.out.println(temp_compare);
-
-                }
-
-            }
-
-
-            
-            // tweede bij die een match is
-            // dan de laatste, als ik een match vind waarbij de andere twee verschillend zijn:
-            // zeker in de hand!!
+            System.out.println("bij speler" + (x+1) + ":" + kaartenInHand.get(x));
             System.out.println("mogelijk bij speler" + (x+1) + ":" + kaartenMogelijkInHand.get(x));
             System.out.println("onmogelijk bij speler" + (x+1) + ":" + kaartenOnmogelijkInHand.get(x));
-            // hierin roepen wij dan bewerken ^^
+            // hierin roepen wij dan bewerken() ^^
         }
 
         // hier kunnen wij het doen, laat ons beginnen met speler 1
