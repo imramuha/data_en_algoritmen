@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Oefeningen.iml" filepath="$PROJECT_DIR$/Oefeningen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/delphi/delphi.iml" filepath="$PROJECT_DIR$/delphi/delphi.iml" />
+    </modules>
+  </component>
+</project>

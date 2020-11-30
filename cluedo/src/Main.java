@@ -1,5 +1,5 @@
+import java.awt.desktop.SystemSleepEvent;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,17 +30,21 @@ public class Main {
             int aantalLocaties = Character.getNumericValue(aantalKaarten.get(1));
             int aantalWapens = Character.getNumericValue(aantalKaarten.get(2));
 
+            int eliminatieStatus = 0;
+
+
             // opslaan en conversie van de input
             String rondes[] = new String[aantalVragen];
-            List<List<Integer>> kaartenInHand = new ArrayList<List<Integer>>();
-            List<List<Integer>> kaartenMogelijkInHand = new ArrayList<List<Integer>>();
-            List<List<Integer>> kaartenOnmogelijkInHand = new ArrayList<List<Integer>>();
+            List<List<String>> kaartenInHand = new ArrayList<List<String>>();
+            List<List<String>> kaartenMogelijkInHand = new ArrayList<List<String>>();
+            List<List<String>> kaartenOnmogelijkInHand = new ArrayList<List<String>>();
+
 
             // maakt een list voor elke speler
             for (int x = 0; x < aantalSpelers; x++) {
-                List<Integer> spelerMogelijk = new ArrayList<>();
-                List<Integer> spelerOnmogelijk = new ArrayList<>();
-                List<Integer> spelers = new ArrayList<>();
+                List<String> spelerMogelijk = new ArrayList<>();
+                List<String> spelerOnmogelijk = new ArrayList<>();
+                List<String> spelers = new ArrayList<>();
                 kaartenMogelijkInHand.add(spelerMogelijk);
                 kaartenOnmogelijkInHand.add(spelerOnmogelijk);
                 kaartenInHand.add(spelers);
@@ -51,7 +55,7 @@ public class Main {
                 String ronde = kaarten.bijhouden(reader.nextLine());
                 rondes[j] = ronde;
             }
-            kaarten.sorteren(aantalSpelers, aantalPersonen, aantalLocaties, aantalWapens, rondes, kaartenInHand, kaartenMogelijkInHand, kaartenOnmogelijkInHand);
+            kaarten.sorteren(aantalSpelers, eliminatieStatus, aantalPersonen, aantalLocaties, aantalWapens, rondes, kaartenInHand, kaartenMogelijkInHand, kaartenOnmogelijkInHand);
 
             speel.speel(aantalSpelers, aantalPersonen, aantalLocaties, aantalWapens);
 
@@ -77,6 +81,7 @@ class Speel {
 
         // aantal kaarten -1 (oplossing) worden over aantal spelers verdeeld
         int kaartenSpeler = (((aantalPersonen)-1) + (aantalLocaties-1) + ((aantalWapens)-1))/aantalSpelers;
+        System.out.println(kaartenSpeler);
 
         // hierin zullen wij de vragen overlopen
 
@@ -125,13 +130,13 @@ class Kaarten {
            return ronde;
     }
 
-    public void sorteren(int aantalSpelers, int aantalPersonen, int aantalLocaties, int aantalWapens, String[] rondes,List<List<Integer>> kaartenInHand, List<List<Integer>> kaartenMogelijkInHand, List<List<Integer>> kaartenOnmogelijkInHand) {
+    public void sorteren(int aantalSpelers, int eliminatieStatus, int aantalPersonen, int aantalLocaties, int aantalWapens, String[] rondes,List<List<String>> kaartenInHand, List<List<String>> kaartenMogelijkInHand, List<List<String>> kaartenOnmogelijkInHand) {
 
         // vraagRondes // elke ronde is data anders dus hier gebeurt veel
         for (int j = 0; j<rondes.length; j++) {
 
             int vrager = Character.getNumericValue(rondes[j].charAt(0));
-            int gevraagdeKaarten = Integer.valueOf(rondes[j].substring(1, 4));
+            String gevraagdeKaarten = rondes[j].substring(1, 4);
             int gevraagdeSpeler = Character.getNumericValue(rondes[j].charAt(4));
 
             // sla de gevraagdekaarten als "mogelijkinhand" op bij de vrager
@@ -207,54 +212,208 @@ class Kaarten {
 
         }
 
+        List<List<String>> uniquesMogelijk = new ArrayList<List<String>>();
+        List<List<String>> uniqueKaarten = new ArrayList<List<String>>();
+
         for (int x = 0;  x < aantalSpelers; x++) {
 
-            for ( int y = 0; y < kaartenInHand.get(x).size(); y++) {
+            List<String> spelersLists = new ArrayList<>();
+            List<String> spelersHashSets = new ArrayList<>();
+            uniquesMogelijk.add(spelersLists);
+            uniqueKaarten.add(spelersHashSets);
 
-                for (int z = 0; z < kaartenOnmogelijkInHand.get(x).size(); z++) {
+           for ( int y = 0; y < kaartenInHand.get(x).size(); y++) {
 
-                    String temp = kaartenInHand.get(x).get(y).toString();
-                    String temp_compare = kaartenOnmogelijkInHand.get(x).get(z).toString();
+               String temp = kaartenInHand.get(x).get(y);
+               String t = "";
+               String o = "";
+               String m = "";
 
-                    if (temp.charAt(1) == temp_compare.charAt(1) && temp.charAt(2) == temp_compare.charAt(2)  && temp.charAt(0) != temp_compare.charAt(0)) // if its not same it means it might exist
-                    {
-                        // hier numberhouden
-                        System.out.println(temp);
-                        System.out.println(temp_compare.charAt(0));
-                        System.out.println("unique - first");
+                for ( int z = 0; z < 3; z++) {
+
+                    for (int xx = 0; xx < kaartenOnmogelijkInHand.get(x).size(); xx++) {
+                        String temp_compare = kaartenOnmogelijkInHand.get(x).get(xx);
+
+
+                        if (temp.charAt(z) != temp_compare.charAt(z) && z == 0) {
+                            t =  t + temp.charAt(z);
+                        } else if(z == 0) {
+                            t =  t + "x";
+                            break;
+                        }
+
+                        if (temp.charAt(z) != temp_compare.charAt(z) && z == 1) {
+
+                            o =  o + temp.charAt(z);
+                        } else if(z == 1) {
+                            o =  o + "x";
+                            break;
+                        }
+
+                        if (temp.charAt(z) != temp_compare.charAt(z) && z == 2) {
+                            m =  m + temp.charAt(z);
+                        } else if(z == 2) {
+                            m =  m + "x";
+                            break;
+                        }
+
                     }
-                    if (temp.charAt(1) == temp_compare.charAt(1) && temp.charAt(0) == temp_compare.charAt(0)  && temp.charAt(2) != temp_compare.charAt(2) ){ // if its not same it means it might exist
-                        // hier grote alfabet
-                        int b = (int) temp.charAt(2) + 48;
-                        // hier numberhouden
-                        System.out.println((char)b);
-                        System.out.println("unique - last");
-                        System.out.println(temp);
-                    }
-                    if (temp.charAt(2) == temp_compare.charAt(2) && temp.charAt(0) == temp_compare.charAt(0)  && temp.charAt(1) != temp_compare.charAt(1)) {
-                        // hier klein kapitaal
-                        int b = (int) temp.charAt(1) + 16;
-                        // hier numberhouden
-                        System.out.println((char)b);
-                        System.out.println("unique - middle unique");
-                        System.out.println(temp);
-                    }
-                    //System.out.println(temp + ":" + temp_compare);
                 }
+
+               /*System.out.println("t: " +t);
+               System.out.println("o: " +o);
+               System.out.println("m: " + m);*/
+
+                String ol = String.valueOf(t.charAt(t.length()-1)) + String.valueOf(o.charAt(o.length()-1)) + String.valueOf(m.charAt(m.length()-1));
+                uniquesMogelijk.get(x).add(ol);
+
+                int aantalOnmogelijkeKaarten = 0;
+
+                for(int l = 0; l < 3; l++) {
+                    if(Character.isAlphabetic(ol.charAt(l))){
+                        aantalOnmogelijkeKaarten += 1;
+                    }
+                    if (aantalOnmogelijkeKaarten == 2) {
+                        uniqueKaarten.get(x).add(ol);
+                        // hier moet ik het verwijderen;
+                        uniquesMogelijk.get(x).remove(ol);
+                    }
+                }
+
+               if (Character.isAlphabetic(t.charAt(t.length()-1)) && Character.isAlphabetic(o.charAt(o.length()-1))) {
+                   uniqueKaarten.get(x).add(String.valueOf(t.charAt(t.length()-1)) + String.valueOf(o.charAt(o.length()-1)) + String.valueOf(m.charAt(m.length()-1)));
+               }
+               if (Character.isAlphabetic(t.charAt(t.length()-1)) && Character.isAlphabetic(m.charAt(m.length()-1))) {
+                   uniqueKaarten.get(x).add(String.valueOf(t.charAt(t.length()-1)) + String.valueOf(o.charAt(o.length()-1)) + String.valueOf(m.charAt(m.length()-1)));
+               }
+               if(Character.isAlphabetic(o.charAt(o.length()-1)) && Character.isAlphabetic(m.charAt(m.length()-1))) {
+                   uniqueKaarten.get(x).add(String.valueOf(t.charAt(t.length()-1)) + String.valueOf(o.charAt(o.length()-1)) + String.valueOf(m.charAt(m.length()-1)));
+               }
             }
 
+            /*System.out.println("uniques nog mogelijk:" + uniquesMogelijk);
+            System.out.println("uniques al gevonden:" + uniqueKaarten);
             System.out.println("bij speler" + (x+1) + ":" + kaartenInHand.get(x));
-            System.out.println("mogelijk bij speler" + (x+1) + ":" + kaartenMogelijkInHand.get(x));
-            System.out.println("onmogelijk bij speler" + (x+1) + ":" + kaartenOnmogelijkInHand.get(x));
-            // hierin roepen wij dan bewerken() ^^
+            System.out.println("onmogelijk bij speler:" + (x+1) + ":" + kaartenOnmogelijkInHand.get(x));
+            System.out.println("---------------------");*/
+
         }
 
-        // hier kunnen wij het doen, laat ons beginnen met speler 1
+        bewerken(aantalSpelers, uniquesMogelijk, uniqueKaarten, eliminatieStatus);
 
     }
 
-    public void bewerken() {
+    public int elimineren(int aantalSpelers, List<List<String>> uniquesMogelijk, List<List<String>> uniqueKaarten) {
+        // hierin gaan wij kaarten x'en/elimineren;
 
+        //String temp = kaartenInHand.get(x).get(y);
+
+        System.out.println("uniques nog mogelijk:" + uniquesMogelijk);
+        System.out.println("uniques al gevonden:" + uniqueKaarten);
+        int status = 0;
+
+        for (int x = 0; x < aantalSpelers; x++) {
+
+            for(int y = 0; y < uniquesMogelijk.get(x).size(); y++) {
+
+                String uniqueMogelijk = uniquesMogelijk.get(x).get(y);
+                String persoon = "";
+                String locatie = "";
+                String wapen = "";
+
+                //System.out.println("yy" + uniquesMogelijk.get(x).size());
+
+                for(int z = 0; z < aantalSpelers; z++) {
+
+                        for (int xx = 0; xx < uniqueKaarten.get(z).size(); xx++) {
+                            //System.out.println( "zz" + uniqueKaarten.get(z).size());
+
+                            String unique = uniqueKaarten.get(z).get(xx);
+                            System.out.println(uniqueMogelijk);
+                            System.out.println(unique);
+
+
+                            for (int yy = 0; yy < 3; yy++) {
+                                if (uniqueMogelijk.charAt(yy) != unique.charAt(yy) && yy == 0 && String.valueOf(uniqueMogelijk.charAt(yy)) != "x") {
+                                    persoon = persoon + uniqueMogelijk.charAt(yy);
+                                } else if (yy == 0) {
+                                    persoon = persoon + "x";
+                                    break;
+                                }
+
+                                if (uniqueMogelijk.charAt(yy) != unique.charAt(yy) && yy == 1 && String.valueOf(uniqueMogelijk.charAt(yy)) != "x") {
+                                    locatie = locatie + uniqueMogelijk.charAt(yy);
+                                } else if (yy == 1) {
+                                    locatie = locatie + "x";
+                                    break;
+                                }
+
+                                if (uniqueMogelijk.charAt(yy) != unique.charAt(yy) && yy == 2 && String.valueOf(uniqueMogelijk.charAt(yy)) != "x") {
+                                    wapen = wapen + uniqueMogelijk.charAt(yy);
+                                } else if (yy == 2) {
+                                    wapen = wapen + "x";
+                                    break;
+                                }
+                            }
+
+,
+                            System.out.println("---------");
+                            status = 1;
+                        }
+                }
+                String ol = String.valueOf(persoon.charAt(persoon.length()-1)) + String.valueOf(locatie.charAt(locatie.length()-1)) + String.valueOf(wapen.charAt(wapen.length()-1));
+
+                System.out.println("OLLLL+++++" + ol);
+                int aantalOnmogelijkeKaarten = 0;
+
+                for(int l = 0; l < 3; l++) {
+                    if(Character.isAlphabetic(ol.charAt(l))){
+                        aantalOnmogelijkeKaarten += 1;
+                    }
+                    if (aantalOnmogelijkeKaarten == 2) {
+                        uniqueKaarten.get(x).add(ol);
+                        // hier moet ik het verwijderen;
+                        uniquesMogelijk.get(x).remove(ol);
+                    }
+                }
+
+                if (Character.isAlphabetic(persoon.charAt(persoon.length()-1)) && Character.isAlphabetic(locatie.charAt(locatie.length()-1))) {
+                    uniqueKaarten.get(x).add(String.valueOf(persoon.charAt(persoon.length()-1)) + String.valueOf(locatie.charAt(locatie.length()-1)) + String.valueOf(wapen.charAt(wapen.length()-1)));
+                }
+                if (Character.isAlphabetic(persoon.charAt(persoon.length()-1)) && Character.isAlphabetic(wapen.charAt(wapen.length()-1))) {
+                    uniqueKaarten.get(x).add(String.valueOf(persoon.charAt(persoon.length()-1)) + String.valueOf(locatie.charAt(locatie.length()-1)) + String.valueOf(wapen.charAt(wapen.length()-1)));
+                }
+                if(Character.isAlphabetic(locatie.charAt(locatie.length()-1)) && Character.isAlphabetic(wapen.charAt(wapen.length()-1))) {
+                    uniqueKaarten.get(x).add(String.valueOf(persoon.charAt(persoon.length()-1)) + String.valueOf(locatie.charAt(locatie.length()-1)) + String.valueOf(wapen.charAt(wapen.length()-1)));
+                }
+
+                System.out.println("uniques nog mogelijk:" + uniquesMogelijk);
+                System.out.println("uniques al gevonden:" + uniqueKaarten);
+                System.out.println("---------------------");
+
+            }
+
+
+        }
+        return status;
+    }
+
+    public void bewerken(int aantalSpelers, List<List<String>> uniquesMogelijk, List<List<String>> uniqueKaarten, int eliminatieStatus) {
+
+        System.out.println(eliminatieStatus);
+        // hier gaat een int zijn die ofwel 0 of 1 zal zijn, 1 als wij een nique zullen vinden, dan zal deze opnieuw herhaald worden;
+        // als 0 dan hebben wij alle uniques gevonden dus ook geen dinges meer nodig;
+
+        eliminatieStatus = elimineren(aantalSpelers, uniquesMogelijk, uniqueKaarten);
+
+        System.out.println("::" + eliminatieStatus);
+
+        // if returns 1 then we continue if 0 we stop;
+
+        // w doen het tot de ize iet meer groeit
+        // runs and fines nqies
+        // converts
+        // takes uniques data from eash player saves in a global var
     }
 
 }
