@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Oefeningen.iml" filepath="$PROJECT_DIR$/.idea/Oefeningen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/arctische verbindingen/arctische verbindingen.iml" filepath="$PROJECT_DIR$/arctische verbindingen/arctische verbindingen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cluedo/cluedo.iml" filepath="$PROJECT_DIR$/cluedo/cluedo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/delphi/delphi.iml" filepath="$PROJECT_DIR$/delphi/delphi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/naomees/naomees.iml" filepath="$PROJECT_DIR$/naomees/naomees.iml" />
     </modules>
   </component>
 </project>
