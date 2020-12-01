@@ -20,23 +20,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54d89f10-c990-428f-a64e-2ad0fa7a565c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Oefeningen.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/delphi/delphi.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/delphi/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/delphi/src/ss.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/naomees/.idea/libraries/KotlinJavaRuntime__2_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/naomees/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cluedo/out/production/cluedo/Kaarten.class" beforeDir="false" afterPath="$PROJECT_DIR$/cluedo/out/production/cluedo/Kaarten.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cluedo/out/production/cluedo/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/cluedo/out/production/cluedo/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cluedo/out/production/cluedo/Speel.class" beforeDir="false" afterPath="$PROJECT_DIR$/cluedo/out/production/cluedo/Speel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/arctische verbindingen/arctische verbindingen.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/arctische verbindingen/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/delphi/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/delphi/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/delphi/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/delphi/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/naomees/naomees.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/naomees/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Oefeningen.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cluedo/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/cluedo/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cluedo/testinvoer.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cluedo/testinvoer.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delphi/delphi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/delphi/delphi.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delphi/src/ss.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/naomees/.idea/libraries/KotlinJavaRuntime__2_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/naomees/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/delphi/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/delphi/Orakel.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +71,22 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\im_19\Desktop\02. KU Leuven\02. Data &amp; algoritmen\Oefeningen\delphi" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\im_19\Desktop\02. KU Leuven\02. Data &amp; algoritmen\Oefeningen\naomees" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main (1)">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="arctische verbindingen" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="delphi" />
@@ -83,6 +103,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.ss" />
       </list>
@@ -109,27 +130,37 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1431" height="204" key="GridCell.Tab.0.bottom" timestamp="1606672595452">
+    <state x="518" y="187" key="FileChooserDialogImpl" timestamp="1606818659205">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
+    <state x="518" y="187" key="FileChooserDialogImpl/0.0.1474.864/1920.0.1538.900@0.0.1474.864" timestamp="1606818659205" />
+    <state width="1431" height="204" key="GridCell.Tab.0.bottom" timestamp="1606817682771">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state width="1431" height="204" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.0.1538.900@0.0.1474.864" timestamp="1606817682771" />
     <state width="1431" height="204" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1606672595452" />
-    <state width="1431" height="204" key="GridCell.Tab.0.center" timestamp="1606672595452">
+    <state width="1431" height="204" key="GridCell.Tab.0.center" timestamp="1606817682771">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
+    <state width="1431" height="204" key="GridCell.Tab.0.center/0.0.1474.864/1920.0.1538.900@0.0.1474.864" timestamp="1606817682771" />
     <state width="1431" height="204" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1606672595452" />
-    <state width="1431" height="204" key="GridCell.Tab.0.left" timestamp="1606672595452">
+    <state width="1431" height="204" key="GridCell.Tab.0.left" timestamp="1606817682771">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
+    <state width="1431" height="204" key="GridCell.Tab.0.left/0.0.1474.864/1920.0.1538.900@0.0.1474.864" timestamp="1606817682771" />
     <state width="1431" height="204" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1606672595452" />
-    <state width="1431" height="204" key="GridCell.Tab.0.right" timestamp="1606672595452">
+    <state width="1431" height="204" key="GridCell.Tab.0.right" timestamp="1606817682771">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
+    <state width="1431" height="204" key="GridCell.Tab.0.right/0.0.1474.864/1920.0.1538.900@0.0.1474.864" timestamp="1606817682771" />
     <state width="1431" height="204" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1606672595452" />
-    <state x="178" y="53" key="new project wizard" timestamp="1606665647844">
+    <state x="178" y="53" key="new project wizard" timestamp="1606818710511">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
+    <state x="178" y="53" key="new project wizard/0.0.1474.864/1920.0.1538.900@0.0.1474.864" timestamp="1606818710511" />
     <state x="178" y="53" key="new project wizard/0.0.1474.864@0.0.1474.864" timestamp="1606665647844" />
   </component>
 </project>
