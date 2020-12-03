@@ -1,62 +1,80 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Voer de input voor output in: ");
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        int aantalTestGevallen = Integer.parseInt(reader.nextLine());
+        int aantalTestGevallen = Integer.parseInt(reader.readLine());
         int aantalRegelsPerTestGeval = 5;
+
+        List<String> alleResultaten = Arrays.asList(new String[aantalTestGevallen]);
 
         Controleer controleer = new Controleer();
 
-        // string array met onze data :) die wij op het einde zullen tonen;
-        System.out.println(aantalTestGevallen);
-
+        // per testgeval elk woord controleren;
         for(int i = 0; i < aantalTestGevallen; i++) {
-            System.out.println(i);
-            for (int j = 0; j <= aantalRegelsPerTestGeval; j++) {
-                System.out.println(j);
+            for (int j = 0; j < aantalRegelsPerTestGeval; j++) {
 
-                String testGeval = reader.nextLine();
-                System.out.println(testGeval);
+                String testGeval = reader.readLine();
+                String temp = alleResultaten.get(i);
 
-                // hier gaan wij een functie uitvoeren die weergeeft of het true of onzin is, en die gaan wij dan displayed;
-                controleer.testGeval(testGeval);
+                if(temp == null) {
+                    temp = controleer.testGeval(testGeval);
+                } else {
+                    temp = temp + " " + controleer.testGeval(testGeval);
+                }
+                alleResultaten.set(i, temp);
             }
+        }
+
+        // resultaten tonen;
+        for(int i = 0; i < alleResultaten.size() ; i++) {
+            System.out.println((i + 1) + " " + alleResultaten.get(i));
         }
     }
 }
 
 class Controleer {
-    public void testGeval(String testGeval) {
+
+    public String testGeval(String testGeval) {
 
         int aantalKoppelsPerTestGeval = testGeval.length() / 2;
+        int aantalMogelijkeControles;
 
+        String woordStatus = "naomees";
+
+        // even of oneven aantal woordkoppels
         if(aantalKoppelsPerTestGeval % 2 == 0) {
-            int aantalMogelijkeControles = aantalKoppelsPerTestGeval / 2;
-            int g = 0;
-            int h = testGeval.length() - 2;
+            aantalMogelijkeControles = aantalKoppelsPerTestGeval / 2;
+        } else {
+            aantalMogelijkeControles = (aantalKoppelsPerTestGeval - 1) / 2;
+        }
 
+        int startBeginWoord = 0;
+        int endEindeWoord = testGeval.length();
 
-            for(int x = aantalMogelijkeControles; x > 0; x--) {
-                System.out.println("[" + g + "." + (g + 2) + "]");
-                System.out.println(g);
+        for(int x = aantalMogelijkeControles; x > 0; x--) {
 
-                String frontString = testGeval.substring(g, (g + 2));
-                String endString = testGeval.substring((h - 2), h);
+            String beginWoord = testGeval.substring(startBeginWoord, (startBeginWoord + 2));
+            String eindeWoord = testGeval.substring((endEindeWoord - 2), endEindeWoord);
 
-                System.out.println(frontString);
-                System.out.println(endString);
-
-                h = h - 2;
-                g = g + 2;
+            // vergelijken van woorden;
+            if (!beginWoord.equals(eindeWoord)) {
+                woordStatus = "onzin";
+                break;
             }
 
-            System.out.println(aantalMogelijkeControles);
-        } else {
-            int aantalMogelijkeControles = (aantalKoppelsPerTestGeval - 1) / 2;
-            System.out.println(aantalMogelijkeControles);
+            startBeginWoord = startBeginWoord + 2;
+            endEindeWoord = endEindeWoord - 2;
         }
+
+        return woordStatus;
     }
+
+
 }
