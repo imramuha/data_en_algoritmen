@@ -20,19 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cd7e438-8ff4-4061-a47e-d6f629e6221f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../arctische verbindingen/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cocktails/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dictee/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dictee/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../arctische verbindingen/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../arctische verbindingen/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../delphi/out/production/delphi/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../delphi/out/production/delphi/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../delphi/out/production/delphi/Orakel.class" beforeDir="false" afterPath="$PROJECT_DIR$/../delphi/out/production/delphi/Orakel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../delphi/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../delphi/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cocktails/out/production/cocktails/Bar.class" beforeDir="false" afterPath="$PROJECT_DIR$/../cocktails/out/production/cocktails/Bar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cocktails/out/production/cocktails/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../cocktails/out/production/cocktails/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cocktails/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cocktails/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../dictee/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../dictee/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../naomees/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../naomees/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dictee/out/production/dictee/Dictee.class" beforeDir="false" afterPath="$PROJECT_DIR$/../dictee/out/production/dictee/Dictee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dictee/out/production/dictee/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../dictee/out/production/dictee/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dictee/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../dictee/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/satelliet/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/satelliet/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/satelliet/Satelliet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/satelliet/Satelliet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +56,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dictee" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cocktails" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -95,27 +93,28 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="518" y="187" key="FileChooserDialogImpl" timestamp="1606999742772">
+    <state x="518" y="187" key="FileChooserDialogImpl" timestamp="1607288149043">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state x="518" y="187" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1606999742772" />
-    <state width="1431" height="224" key="GridCell.Tab.0.bottom" timestamp="1606998096793">
+    <state x="518" y="187" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1607288149043" />
+    <state width="1431" height="287" key="GridCell.Tab.0.bottom" timestamp="1607288154731">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1606998096793" />
-    <state width="1431" height="224" key="GridCell.Tab.0.center" timestamp="1606998096793">
+    <state width="1431" height="287" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1607288154731" />
+    <state width="1431" height="287" key="GridCell.Tab.0.center" timestamp="1607288154731">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1606998096793" />
-    <state width="1431" height="224" key="GridCell.Tab.0.left" timestamp="1606998096793">
+    <state width="1431" height="287" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1607288154731" />
+    <state width="1431" height="287" key="GridCell.Tab.0.left" timestamp="1607288154731">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1606998096793" />
-    <state width="1431" height="224" key="GridCell.Tab.0.right" timestamp="1606998096793">
+    <state width="1431" height="287" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1607288154731" />
+    <state width="1431" height="287" key="GridCell.Tab.0.right" timestamp="1607288154731">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1606998096793" />
+    <state width="1431" height="287" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1607288154731" />
   </component>
 </project>
