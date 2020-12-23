@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,13 +7,13 @@ public class Main {
     public static void main(String[] args) {
 
         Bar bar = new Bar();
-        bar.serveer();
+        bar.manage();
 
     }
 }
 
 class Bar {
-    public void serveer() {
+    public void manage() {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -45,45 +44,99 @@ class Bar {
                 }
             }
 
+            //System.out.println(aantalBarmannenPerRecept);
+
             int aantalOrders = Integer.parseInt(scanner.nextLine());
-            String mogelijkheidOrder = "mogelijk";
+            String orderStatus = "";
 
             for (int y = 0; y < aantalOrders; y++) {
-                // make a new array with out results ^^
 
-                // copy van vorige lijst;
-                List<List<Integer>> aantalBeschikbareBarmannen = new ArrayList<>();
                 String order = scanner.nextLine();
+                serveer(aantalBarmannenPerRecept, order, orderStatus, 0, 1);
 
-                for(int i = 0; i < aantalBarmannenPerRecept.size(); i++) {
 
-                    // we add.() amount of barmannen
-                    List<Integer> barman = new ArrayList<>();
-                    aantalBeschikbareBarmannen.add(barman);
-                    System.out.println(aantalBeschikbareBarmannen);
 
-                    for(int j = 0; j < aantalBarmannenPerRecept.get(i).size(); j++) {
-
-                        int huidigeRecept = aantalBarmannenPerRecept.get(i).get(j);
-                        System.out.println("++" + huidigeRecept);
-                        aantalBeschikbareBarmannen.get(i).add(huidigeRecept);
-
-                        for(int z = 0; z < order.length(); z++) {
-
-                            // van de letter naar nummer;
-                            int karakterPositie = order.charAt(z) - 64;
-                            System.out.println("--" + karakterPositie);
-
-                            if(huidigeRecept == karakterPositie && aantalBarmannenPerRecept.get(i).get(j) > 0) {
-                                aantalBeschikbareBarmannen.get(i).set(j, (~(aantalBarmannenPerRecept.get(i).get(j)-1)));
-                                System.out.println("boop");
-                                System.out.println("o::" + aantalBeschikbareBarmannen);
-                            }
-                        }
-                    }
-                }
-                System.out.println("onder::" + aantalBeschikbareBarmannen);
             }
         }
+    }
+
+    public Boolean serveer(List<List<Integer>> aantalBarmannenPerRecept, String order, String orderStatus, int opposum, int count) {
+
+        // een oplossing gevonden //basecase
+        if(orderStatus == "mogelijk") {
+            System.out.println("mogelijk");
+            return true;
+        } else if(orderStatus == "onmogelijk") {
+            System.out.println("onmogelijk");
+            return true;
+        }
+
+
+        for(int x = opposum; x < aantalBarmannenPerRecept.size(); x++) {
+            for(int y = x; y < order.length(); y++) {
+                int karakterPositie = order.charAt(y) - 64;
+
+                System.out.println("x" + x + ": " + aantalBarmannenPerRecept.get(x));
+                System.out.println("y" + y + ": " + order.charAt(y) + " - " + (order.charAt(y) - 64));
+                if(aantalBarmannenPerRecept.get(x).contains(karakterPositie)) {
+
+                    System.out.println("count" + count);
+                    System.out.println("siz" + (aantalBarmannenPerRecept.size()));
+
+                    if(x == aantalBarmannenPerRecept.size()) {
+                        System.out.println(1);
+                        if (count == aantalBarmannenPerRecept.size()){
+                            opposum += 1;
+                            orderStatus = "mogelijk";
+                            serveer(aantalBarmannenPerRecept, order, orderStatus, opposum, count);
+                            break;
+                        }
+                        System.out.println(11);
+                        opposum = 0;
+                        count += 1;
+                        serveer(aantalBarmannenPerRecept, order, orderStatus, opposum, count);
+                        //break;
+
+                    } else if (x != aantalBarmannenPerRecept.size()) {
+                        System.out.println(2);
+                        if (count == aantalBarmannenPerRecept.size()){
+                            opposum += 1;
+                            orderStatus = "mogelijk";
+                            serveer(aantalBarmannenPerRecept, order, orderStatus, opposum, count);
+                            break;
+                        }
+                        System.out.println(22);
+                        opposum += 1;
+                        count += 1;
+                        serveer(aantalBarmannenPerRecept, order, orderStatus, opposum, count);
+                        break;
+                    }
+
+                } else {
+
+                    // ERGENS MOETEN WIJ ACHTERHALEN OM DIE TE STOPPEN TE RECURSIEVEN
+
+                    if(x == aantalBarmannenPerRecept.size()) {
+                        System.out.println(4);
+                        opposum = 0;
+                        count += 1;
+                        serveer(aantalBarmannenPerRecept, order, orderStatus, opposum, count);
+                    } else if (x != aantalBarmannenPerRecept.size() ) {
+                        System.out.println(5);
+                        opposum += 1;
+                        count += 1;
+                        serveer(aantalBarmannenPerRecept, order, orderStatus, opposum, count);
+                    } else if (count == aantalBarmannenPerRecept.size()) {
+                        System.out.println(6);
+                        count = 0;
+                        orderStatus = "onmogelijk";
+                        serveer(aantalBarmannenPerRecept, order, orderStatus, opposum, count);
+                        break;
+                    }
+                }
+            }
+            System.out.println("---");
+        }
+        return false;
     }
 }
