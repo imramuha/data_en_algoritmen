@@ -91,7 +91,7 @@ class Parcour {
         if(resultaat == Integer.MIN_VALUE) {
             System.out.println(aantalParcours + " " + "min oneindig");
         } else if (resultaat == Integer.MAX_VALUE) {
-            System.out.println(aantalParcours + " " + "max oneindig");
+            System.out.println(aantalParcours + " " + "plus oneindig");
         } else {
             System.out.println(aantalParcours + " " + dis[dis.length-1]);
         }
