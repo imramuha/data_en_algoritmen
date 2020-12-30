@@ -20,17 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cd7e438-8ff4-4061-a47e-d6f629e6221f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../cocktails/out/production/cocktails/Bar.class" beforeDir="false" afterPath="$PROJECT_DIR$/../cocktails/out/production/cocktails/Bar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cocktails/out/production/cocktails/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../cocktails/out/production/cocktails/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cocktails/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cocktails/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dictee/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../dictee/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dictee/out/production/dictee/Dictee.class" beforeDir="false" afterPath="$PROJECT_DIR$/../dictee/out/production/dictee/Dictee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dictee/out/production/dictee/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../dictee/out/production/dictee/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dictee/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../dictee/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/KotlinJavaRuntime__2_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pizzakoerier/pizzakoerier.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pizzakoerier/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/jediparcours/Parcour.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/jediparcours/Parcour.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/satelliet/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/satelliet/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/satelliet/Satelliet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/satelliet/Satelliet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +51,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cocktails" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jediparcours/src/Main.java" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -96,10 +91,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="518" y="187" key="FileChooserDialogImpl" timestamp="1607288149043">
+    <state x="518" y="187" key="FileChooserDialogImpl" timestamp="1608898248544">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state x="518" y="187" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1607288149043" />
+    <state x="518" y="187" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1608898248544" />
     <state width="1431" height="287" key="GridCell.Tab.0.bottom" timestamp="1607288154731">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
