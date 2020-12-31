@@ -14,50 +14,40 @@ public class Main {
 class Achtbaan {
 
     public void construeer() {
-        Scanner scanner = new Scanner(System.in);
 
+        Scanner scanner = new Scanner(System.in);
         int aantalAchtbanen = Integer.parseInt(scanner.nextLine());
-        System.out.println(aantalAchtbanen);
 
         for(int i = 0; i < aantalAchtbanen; i++) {
 
+            int x = 0;
+            int y = 0;
+            int z = 0;
             String richting = "O";
 
-            // position in de kolom
-            int x = 0;
-
-            int y = 0;
-            // gaat dninge hebben op overriting
-            int z = 0;
-
-            // aantal nveaus/stappen kan nooit hoger zijn dan aantal stappen
-
             int aantalStappen = scanner.nextInt();
-            //System.out.println(aantalStappen);
+            String stappen = scanner.next();
 
             ArrayList<ArrayList<Character>> maxVerdiepingen = new ArrayList<ArrayList<Character>>(aantalStappen);
             ArrayList<Character> maxBewegingen = new ArrayList<Character>(aantalStappen);
             maxVerdiepingen.add(maxBewegingen);
 
-            String stappen = scanner.next();
-
             for(int j = 0; j < aantalStappen;j++) {
                 ArrayList<Character> segment = new ArrayList<Character>(aantalStappen);
 
-                System.out.println(maxVerdiepingen);
-
                 switch(stappen.charAt(j)) {
                     case 'S': {
+                        System.out.println("S: " + x);
                         maxVerdiepingen.get(y).add('=');
                         x+=1;
 
                         break;
                     }
                     case 'V': {
-
+                        System.out.println("V: "+ x);
                         if(richting == "O") {
                             if(x > maxVerdiepingen.get(y).size() - 1 ) {
-                                maxVerdiepingen.get(y).add('o');
+                                maxVerdiepingen.get(y).add('_');
 
                                 for(int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if(y != a) {
@@ -67,7 +57,7 @@ class Achtbaan {
 
                             } else if(x < 0) {
 
-                                maxVerdiepingen.get(y).add(0, '0');
+                                maxVerdiepingen.get(y).add(0, '_');
 
                                 for(int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if(y != a) {
@@ -76,8 +66,10 @@ class Achtbaan {
                                 }
                             } else if (x < maxVerdiepingen.get(y).size() && x >= 0) {
 
-                                if (z <= 0) {
-                                    maxVerdiepingen.get(y).set(x,'O');
+                                // als z hoger is
+                                // naar z toe is -
+                                if (z <= 0 || maxVerdiepingen.get(y).get(x) == '.') {
+                                    maxVerdiepingen.get(y).set(x, '_');
                                 }
                             }
 
@@ -89,9 +81,40 @@ class Achtbaan {
                         }
 
                         if (richting == "W") {
+                            System.out.println("ezez" + z);
+
+                            if(x > maxVerdiepingen.get(y).size() - 1 ) {
+                                maxVerdiepingen.get(y).add('_');
+
+                                for(int a = 0; a < maxVerdiepingen.size(); a++) {
+                                    if(y != a) {
+                                        maxVerdiepingen.get(a).add('.');
+                                    }
+                                }
+
+                            } else if(x < 0) {
+
+                                maxVerdiepingen.get(y).add(0, '_');
+
+                                for(int a = 0; a < maxVerdiepingen.size(); a++) {
+                                    if(y != a) {
+                                        maxVerdiepingen.get(a).add(0,'.');
+                                    }
+                                }
+                            } else if (x < maxVerdiepingen.get(y).size() && x >= 0) {
+
+                                if (z <= 0 || maxVerdiepingen.get(y).get(x) == '.') {
+                                    maxVerdiepingen.get(y).set(x,'_');
+                                }
+                            }
+
+                            x-=1;
+
+                        }
+                        if(richting == "Z") {
 
                             if(x < 0 ) {
-                                maxVerdiepingen.get(y).add(0,'w');
+                                maxVerdiepingen.get(y).add(0,'_');
 
                                 for(int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if(y != a) {
@@ -100,26 +123,20 @@ class Achtbaan {
                                 }
 
 
-                            } else {
-                                System.out.println("thing");
-                                System.out.println(x);
+                            } else if (x < maxVerdiepingen.get(y).size() && x >= 0) {
 
-                                if(maxVerdiepingen.get(y).get(x) == '.' ||  z < 0) {
-                                    maxVerdiepingen.get(y).set(x,'W');
+                                if (z <= 0 || maxVerdiepingen.get(y).get(x) == '.') {
+                                    maxVerdiepingen.get(y).set(x, '_');
                                 }
                             }
 
-                            x-=1;
-
-                        }
-                        if(richting == "Z") {
                             z-=1;
                         }
 
                         break;
                     }
                     case 'U': {
-
+                        System.out.println("U:"+ x);
                         if(y == 0) {
                             maxVerdiepingen.add(0, segment);
 
@@ -152,21 +169,12 @@ class Achtbaan {
                         if (richting == "N") {
 
                             if(x < 0) {
-                                maxVerdiepingen.get(y).add(0, '#');
-                                for (int a = 0; a < maxVerdiepingen.size(); a++) {
-                                    if (y != a) {
-                                        maxVerdiepingen.get(a).add(0, '.');
-                                    }
-                                }
-                            } else if (x > maxVerdiepingen.get(y).size()-1) {
-                                maxVerdiepingen.get(y).add('#');
-                                for (int a = 0; a < maxVerdiepingen.size(); a++) {
-                                    if (y != a) {
-                                        maxVerdiepingen.get(a).add('.');
-                                    }
-                                }
-                            } else if (x >= 0 && x <= maxVerdiepingen.get(y).size() -1){
-                                maxVerdiepingen.get(y).set(x,'#');
+                                maxVerdiepingen.get(y).set(x+1, '#');
+
+                            } else if (x > maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x-1, '#');
+                            } else {
+                                maxVerdiepingen.get(y).set(x, '#');
                             }
 
                             z+=1;
@@ -186,7 +194,6 @@ class Achtbaan {
                                     maxVerdiepingen.get(a).add(0, '.');
                                     }
                                 }
-                                x+=1;
                             }
 
                             x-=1;
@@ -194,25 +201,14 @@ class Achtbaan {
 
                         }
                         if(richting == "Z") {
+                            if(x <= 0) {
+                                maxVerdiepingen.get(y).set(x+1, '#');
 
-                            if(x<0)
-                                maxVerdiepingen.get(y).add(0,'#');
-                                for(int a = 0; a < maxVerdiepingen.size(); a++) {
-                                    if(y != a) {
-                                        maxVerdiepingen.get(a).add(0, '.');
-                                    }
-                                }
-                            if(x>maxVerdiepingen.get(y).size()-1) {
-                                maxVerdiepingen.get(y).add('#');
-                                for (int a = 0; a < maxVerdiepingen.size(); a++) {
-                                    if (y != a) {
-                                        maxVerdiepingen.get(a).add('.');
-                                    }
-                                }
+                            } else if (x >= maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x-1, '#');
+                            } else  {
+                                maxVerdiepingen.get(y).set(x, '#');
                             }
-                            else
-                                maxVerdiepingen.get(y).set(x,'#');
-
 
                             z-=1;
                             y-=1;
@@ -221,6 +217,7 @@ class Achtbaan {
                         break;
                     }
                     case 'D': {
+                        System.out.println("D: "+ x);
 
                         if(maxVerdiepingen.size()-1 < y + 1) {
                             maxVerdiepingen.add(segment);
@@ -235,50 +232,44 @@ class Achtbaan {
                         }
 
                         if(richting == "O") {
-                            if(x > maxVerdiepingen.get(y).size() - 1 ) {
-                                maxVerdiepingen.get(y).add('\\');
-
-                                for(int a = 0; a < maxVerdiepingen.size(); a++) {
-                                    if(y != a) {
-                                        maxVerdiepingen.get(a).add('.');
-                                    }
-                                }
-
-                            }
-                           if(z <= 0 || maxVerdiepingen.get(y).get(x) == '.') {
-                                maxVerdiepingen.get(y).set(x, '\\');
-                           }
-
-                            x+=1;
-
-                        }
-                        if (richting == "N") {
-
-                            if(x < 0) {
-                                maxVerdiepingen.get(y).add(0, '#');
+                            if(x <= 0) {
+                                maxVerdiepingen.get(y).add(0, '\\');
                                 for (int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if (y != a) {
                                         maxVerdiepingen.get(a).add(0, '.');
                                     }
                                 }
-                            } else if (x>maxVerdiepingen.get(y).size()-1) {
-                                maxVerdiepingen.get(y).add('#');
+                            } else if (x >= maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).add('\\');
                                 for (int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if (y != a) {
                                         maxVerdiepingen.get(a).add('.');
                                     }
                                 }
-                            } else if (x >= 0 && x <= maxVerdiepingen.get(y).size() - 1) {
-                                maxVerdiepingen.get(y).set(x, '#');
+                            } else if (x > 0 && x < maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x, '\\');
                             }
 
-                            z+=1;
+                           x+=1;
 
+                        }
+                        if (richting == "N") {
+
+                            if(x <= 0) {
+                                maxVerdiepingen.get(y).set(x+1, '8');
+
+                            } else if (x >= maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x-1, '8');
+                            } else  {
+                                maxVerdiepingen.get(y).set(x, '8');
+                            }
+
+                            z-=1;
 
                         }
                         if (richting == "W") {
 
-                            if(x < 0) {
+                            if(x <= 0) {
                                 maxVerdiepingen.get(y).add(0, '/');
 
                                 for(int a = 0; a < maxVerdiepingen.size(); a++) {
@@ -286,7 +277,6 @@ class Achtbaan {
                                         maxVerdiepingen.get(a).add(0, '.');
                                     }
                                 }
-                                x+=1;
 
                             } else if(maxVerdiepingen.get(y).get(x) == '.') {
                                 maxVerdiepingen.get(y).set(x, '/');
@@ -300,88 +290,87 @@ class Achtbaan {
 
                         if(richting == "Z") {
 
-                            if(x < 0) {
-                                maxVerdiepingen.get(y).set(0,'#');
 
-                                for(int a = 0; a < maxVerdiepingen.size(); a++) {
-                                    if(y != a) {
-                                        maxVerdiepingen.get(a).add(0, '.');
-                                    }
-                                }
-                            } else if(x > maxVerdiepingen.get(y).size()-1) {
-                                maxVerdiepingen.get(y).add('#');
-                                for (int a = 0; a < maxVerdiepingen.size(); a++) {
-                                    if (y != a) {
-                                        maxVerdiepingen.get(a).add('.');
-                                    }
-                                }
-                            } else if (x >= 0 && x <= maxVerdiepingen.get(y).size() - 1) {
+                            if(x <= 0) {
+                                maxVerdiepingen.get(y).set(x+1, '#');
+
+                            } else if (x >= maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x-1, '#');
+                            } else  {
                                 maxVerdiepingen.get(y).set(x, '#');
                             }
 
+                            z+=1;
                         }
-
-                        z-=1;
 
                         break;
                     }
                     case 'L': {
+                        System.out.println("L: "+ x);
 
                         if(richting == "O") {
                             richting = "N";
 
-                            if(x > maxVerdiepingen.get(y).size()-1) {
-                                maxVerdiepingen.get(y).add('6');
+                            if(x >= maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).add('_');
                                 for(int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if(y != a) {
                                         maxVerdiepingen.get(a).add('.');
                                     }
                                 }
+                            } else if(x <= 0) {
+                                maxVerdiepingen.get(y).add(0,'_');
 
-                            } else if (x < 0) {
-                                maxVerdiepingen.get(y).add(0,'6');
                                 for(int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if(y != a) {
-                                        maxVerdiepingen.get(a).add(0,'.');
+                                        maxVerdiepingen.get(a).add('.');
                                     }
                                 }
-                            } else {
-                                maxVerdiepingen.get(y).set(x, '6');
+                            } else if (x > 0 && x < maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x, '_');
                             }
 
                             z+=1;
 
                             break;
                         }
+
+
                         if (richting == "N") {
                             richting = "W";
 
-                            if(x > maxVerdiepingen.get(y).size()-1) {
-                                maxVerdiepingen.get(y).add('N');
+                            if(x > maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).add('_');
                                 for(int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if(y != a) {
                                         maxVerdiepingen.get(a).add('.');
                                     }
                                 }
                             } else if(x < 0) {
-                                maxVerdiepingen.get(y).add(0,'N');
+                                maxVerdiepingen.get(y).add(0,'_');
 
                                 for(int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if(y != a) {
                                         maxVerdiepingen.get(a).add('.');
                                     }
                                 }
-                            } else if (x >= 0 && x <= maxVerdiepingen.get(y).size() -1) {
-                                maxVerdiepingen.get(y).set(x, 'n');
+                            } else if (x >= 0 && x <= maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x, '_');
                             }
+                            System.out.println(z + " 5645464654654");
+
                             x-=1;
+
+                            System.out.println(z + " 5645464654654");
                             break;
                         }
+
+
                         if (richting == "W") {
                             richting = "Z";
 
                             if(x < 0) {
-                                maxVerdiepingen.get(y).add(0, '7');
+                                maxVerdiepingen.get(y).add(0, '_');
 
                                 for(int a = 0; a <= maxVerdiepingen.size()-1; a++) {
                                     if(y != a) {
@@ -389,17 +378,17 @@ class Achtbaan {
                                     }
                                 }
                                 x=0;
-                            } else if (x > maxVerdiepingen.get(y).size() - 1) {
-                                maxVerdiepingen.get(y).add( '7');
+                            } else if (x > maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).add( '_');
 
-                                for(int a = 0; a <= maxVerdiepingen.size()-1; a++) {
+                                for(int a = 0; a <= maxVerdiepingen.size(); a++) {
                                     if(y != a) {
                                         maxVerdiepingen.get(a).add('.');
                                     }
                                 }
                                 x = maxVerdiepingen.get(y).size() - 1;
-                            } else if (x >= 0 && x <= maxVerdiepingen.get(y).size() - 1) {
-                                maxVerdiepingen.get(y).set(x, '7');
+                            } else if (x >= 0 && x <= maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x, '_');
                             }
 
                             z-=1;
@@ -408,74 +397,118 @@ class Achtbaan {
                         };
 
                         if(richting == "Z") {
+                            System.out.println("55");
                             richting = "O";
 
-                            System.out.println(x + " :5454");
-
-                            if(x < 0) {
-                                maxVerdiepingen.get(y).add(0, 'L');
+                            if(x > maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).add('_');
 
                                 for(int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if(y != a) {
-                                        maxVerdiepingen.get(a).add(0, '.');
+                                        maxVerdiepingen.get(a).add('.');
                                     }
                                 }
-                            } else if (x >= 0 && x <= maxVerdiepingen.get(y).size() -1 ) {
-                                maxVerdiepingen.get(y).set(x, 'L');
+                            } else if(x < 0) {
+                                maxVerdiepingen.get(y).add(0,'_');
+
+                                for(int a = 0; a < maxVerdiepingen.size(); a++) {
+                                    if(y != a) {
+                                        maxVerdiepingen.get(a).add('.');
+                                    }
+                                }
+                            } else if (x > 0 && x < maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x, '_');
                             }
-
                             x+=1;
-
                         }
                         break;
                     }
                     case 'R': {
+                        System.out.println("R: "+ x);
 
                         if(richting == "O") {
+
                             richting = "Z";
+
+                            if(x > maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x-1, '_');
+
+                            } else if(x < 0) {
+                                maxVerdiepingen.get(y).set(x+1, '_');
+                            } else  {
+                                maxVerdiepingen.get(y).set(x, '_');
+                            }
+
                             z-=1;
-                            x-=1;
+
                             break;
                         }
 
                         if (richting == "Z") {
                             richting = "W";
 
-                            if(x > 0) {
-                                maxVerdiepingen.get(y).add('R');
+                            if(x >= maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).add('_');
 
                                 for(int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if(y != a) {
-                                        maxVerdiepingen.get(a).add( '.');
+                                        maxVerdiepingen.get(a).add('.');
                                     }
                                 }
+                            } else if(x <= 0) {
+                                maxVerdiepingen.get(y).add(0,'_');
+
+                                for(int a = 0; a < maxVerdiepingen.size(); a++) {
+                                    if(y != a) {
+                                        maxVerdiepingen.get(a).add('.');
+                                    }
+                                }
+                            } else if (x > 0 && x < maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x, '_');
                             }
 
                             x-=1;
-
                             break;
                         }
+
                         if (richting == "W") {
+
                             richting = "N";
+                            if(x >= maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x-1, '_');
+
+                            } else if(x <= 0) {
+                                maxVerdiepingen.get(y).set(x+1, '_');
+                            } else  {
+                                maxVerdiepingen.get(y).set(x, '_');
+                            }
+
                             z+=1;
-                            //x+=1;
                             break;
                         };
+
                         if(richting == "N") {
                             richting = "O";
 
-                            if(x <= 0) {
-                                maxVerdiepingen.get(y).add(0, 'R');
+                            if(x >= maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).add('_');
 
                                 for(int a = 0; a < maxVerdiepingen.size(); a++) {
                                     if(y != a) {
-                                        maxVerdiepingen.get(a).add(0, '.');
+                                        maxVerdiepingen.get(a).add('.');
                                     }
                                 }
-                            } else if (x > 0) {
-                                maxVerdiepingen.get(y).set(x, 'R');
-                            }
+                            } else if(x <= 0) {
+                                maxVerdiepingen.get(y).add(0,'_');
 
+                                for(int a = 0; a < maxVerdiepingen.size(); a++) {
+                                    if(y != a) {
+                                        maxVerdiepingen.get(a).add('.');
+                                    }
+                                }
+                            } else if (x > 0 && x < maxVerdiepingen.get(y).size()) {
+                                maxVerdiepingen.get(y).set(x, '_');
+                            }
 
                             x+=1;
                             break;
@@ -489,12 +522,8 @@ class Achtbaan {
 
             }
 
-            System.out.println(x);
-            System.out.println(y);
-            System.out.println(z);
-
-            for(int p = 0; p < maxVerdiepingen.size(); p++) {
-                System.out.println(maxVerdiepingen.get(p));
+            for(int verdieping = 0; verdieping < maxVerdiepingen.size(); verdieping++) {
+                System.out.println((i + 1) + " " +maxVerdiepingen.get(verdieping));
             }
         }
     }

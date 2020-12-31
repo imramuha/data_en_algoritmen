@@ -15,7 +15,7 @@ public class Main {
 
             String resultaat;
             String aantalSoortenKaarten = reader.nextLine();
-            int aantalVragen = Integer.parseInt(reader.nextLine())
+            int aantalVragen = Integer.parseInt(reader.nextLine());
 
             List<Character> aantalKaarten = kaarten.aantal(aantalSoortenKaarten);
 
@@ -409,7 +409,6 @@ class Kaarten {
     }
 
     public String output(List<HashSet<Character>> uniqueKaarten) {
-
         String resultaat = " ";
 
         for(int aantalSpelers = 0; aantalSpelers < uniqueKaarten.size(); aantalSpelers++) {
@@ -421,7 +420,6 @@ class Kaarten {
             }
             resultaat += " ";
         }
-
         return resultaat;
     }
 }

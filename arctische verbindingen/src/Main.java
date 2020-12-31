@@ -19,7 +19,6 @@ class Connectie {
         Scanner scanner = new Scanner(System.in);
 
         int aantalTestCases = Integer.parseInt(scanner.nextLine());
-        //System.out.println(aantalTestCases);
 
         for(int x = 0; x < aantalTestCases; x++) {
 
@@ -44,7 +43,7 @@ class Connectie {
             List<Integer> gewichten = new ArrayList<>();
 
             // all my edges & gewicht;
-            // elke node met andere node vergelijken en de gewichten opnemen;
+            // elke node met andere node vergelijken en de gewichten opnemen;;
             for(int y = 0; y < nodes.length; y++) {
 
                 int[] startPunt = nodes[y];
